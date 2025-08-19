@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hybrid Crypto-Steganography Suite</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Hybrid Crypto-Steganography</h1>
+            <p>A multi-layer security model combining Hill Cipher, SDES, and Steganography.</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Encryption Panel -->
+            <div class="panel encrypt-panel">
+                <h2><span class="icon">🔒</span> Encrypt</h2>
+                <div class="form-group">
+                    <label for="plaintext">Plaintext Message</label>
+                    <textarea id="plaintext" rows="4" placeholder="Enter your secret message here..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="hill-key-enc">Hill Cipher Key (2x2 Matrix)</label>
+                    <input type="text" id="hill-key-enc" placeholder="e.g., 3 3 2 5">
+                </div>
+                <div class="form-group">
+                    <label for="sdes-key-enc">SDES Key (10 bits)</label>
+                    <input type="text" id="sdes-key-enc" placeholder="e.g., 1010000010">
+                </div>
+                <div class="form-group">
+                    <label for="cover-image-upload" class="file-label">Upload Cover Image</label>
+                    <input type="file" id="cover-image-upload" accept="image/png, image/bmp">
+                    <span id="cover-file-name" class="file-name">No image selected...</span>
+                </div>
+                <button id="encrypt-btn" class="action-btn">Encrypt</button>
+                <div class="image-preview-container" id="stego-image-container" style="display:none;">
+                    <h3>Stego-Image Preview:</h3>
+                    <img id="stego-image-preview" alt="Stego Image">
+                    <a id="download-stego-image" class="action-btn download-btn">Download Image</a>
+                </div>
+            </div>
+
+            <!-- Decryption Panel -->
+            <div class="panel decrypt-panel">
+                <h2><span class="icon">🔓</span> Decrypt</h2>
+                <div class="form-group">
+                    <label for="stego-image-upload" class="file-label">Upload Stego-Image</label>
+                    <input type="file" id="stego-image-upload" accept="image/png">
+                    <span id="stego-file-name" class="file-name">No image selected...</span>
+                </div>
+                <div class="form-group">
+                    <label for="hill-key-dec">Hill Cipher Key (4 numbers)</label>
+                    <input type="text" id="hill-key-dec" placeholder="Enter the same key used for encryption">
+                </div>
+                <div class="form-group">
+                    <label for="sdes-key-dec">SDES Key (10 bits)</label>
+                    <input type="text" id="sdes-key-dec" placeholder="Enter the same key used for encryption">
+                </div>
+                <button id="decrypt-btn" class="action-btn">Decrypt</button>
+                <div class="form-group result-container" id="result-container" style="display:none;">
+                    <label>Recovered Plaintext:</label>
+                    <div id="decrypted-text" class="result-box"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Log Console -->
+        <div class="log-console" id="log-console">
+            <div class="log-header">
+                <h3>Process Log</h3>
+                <button id="clear-log-btn">Clear</button>
+            </div>
+            <div class="log-content" id="log-content">
+                <p class="log-message info">Welcome! The system is ready.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden canvas for image processing -->
+    <canvas id="image-canvas" style="display:none;"></canvas>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
